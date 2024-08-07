@@ -2,27 +2,24 @@ from turtle import Turtle
 
 STARTING_POSITION = [(350, 0), (-350, 0)]
 
+# Move distance of the paddle
+MOVE_DISTANCE = 20
+
 class Paddle:
 
-    def __init__(self):
-        self.create_paddles()
-        self.control_paddles()
+    def __init__(self, position):
+        self.paddle = Turtle(shape="square")
+        self.paddle.shapesize(stretch_wid=5, stretch_len=1)
+        self.paddle.color("white")
+        self.paddle.penup()
+        self.paddle.goto(position)
 
-    def create_paddles(self):
-        """ create paddle """
-        """ 1st paddle -- right side, width = 20, height = 100, x-pos = 350, y-pos = 0 """
-        paddle_table = []
-        
-        for position in STARTING_POSITION:
-            paddle = Turtle(shape="square")
-            paddle.shapesize(stretch_wid=5, stretch_len=1)
-            paddle.penup()
-            paddle.color("white")
-            paddle.goto(position)
+    # control paddle movements
 
-            # store paddles into list
-            paddle_table.append(paddle)
+    def up(self):
+        self.new_y = self.paddle.ycor() + MOVE_DISTANCE
+        self.paddle.goto(self.paddle.xcor(), self.new_y)
 
-    def control_paddles(self):
-        """ control paddle """
-        
+    def down(self):
+        self.new_y = self.paddle.ycor() - MOVE_DISTANCE
+        self.paddle.goto(self.paddle.xcor(), self.new_y)
