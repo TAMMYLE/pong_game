@@ -24,7 +24,7 @@ left_paddle = Paddle(STARTING_POSITION[1])
 screen.tracer(True)
 
 """ create ball """
-main_ball = Ball()
+main_baller = Ball()
 
 """ Listen to key strokes """
 
@@ -45,11 +45,17 @@ while game_is_on:
 
     screen.update()
     time.sleep(0.01)
-    main_ball.move_forward()
+    main_baller.move_forward()
 
     """ detect collisions with top and bottom coors """
-    if main_ball.ycor() > 280 or main_ball.ycor() < -280:
-        main_ball.bounce()
+    if main_baller.ycor() > 280 or main_baller.ycor() < -280:
+        main_baller.bounce_y()
     
-
+    """ detect collisions btw ball and paddles """
+    """ check the ball gone far enough to the right(320) and the distance bt paddle and ball is within 50 pixels from the right """
+    """ check the ball gone far enough to the left(-320) and the distance bt paddle and ball is within 50 pixels from the left """
+    if main_baller.distance(right_paddle.paddle) < 50 and main_baller.xcor() > 320:
+        main_baller.bounce_x()
+    elif main_baller.distance(left_paddle.paddle) < 50 and main_baller.xcor() < -320:
+        main_baller.bounce_x()
 screen.exitonclick()

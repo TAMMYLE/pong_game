@@ -28,7 +28,11 @@ class Ball(Turtle):
         self.goto(new_x, new_y)
 
 
-    def bounce(self):
+    def bounce_y(self):
         """ reverse y coordinate when ball hits top or bottom boundaries """
         self.y_move *= -1
+
+    def bounce_x(self):
+       """ reverse x coordinate when ball hits paddle left or right """
+       self.x_move *= -1
        
